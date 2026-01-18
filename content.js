@@ -7,7 +7,7 @@ chrome.runtime.onMessage.addListener(
                 );
                 const jobs = jobNodes.map(job);
                 const headers = Object.keys(jobs[0])
-                sendResponse({status: 'success', headers, jobs})
+                sendResponse({status: "success", headers, jobs})
             } catch (error) {
                 sendResponse({status: "error"})
             }
