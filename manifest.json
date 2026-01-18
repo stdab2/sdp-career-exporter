@@ -21,5 +21,11 @@
     },
     "host_permissions": [
         "https://www.sdp.ulaval.ca/emplois-stages/compte/recherche/*"
+    ],
+    "content_scripts": [
+        {
+            "matches": ["https://www.sdp.ulaval.ca/emplois-stages/compte/recherche/*"],
+            "js": ["content.js"]
+        }
     ]
 }

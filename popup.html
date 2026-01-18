@@ -74,6 +74,24 @@
         cursor: not-allowed;
         box-shadow: none;
       }
+
+      a {
+        display: block;
+        margin-top: 12px;
+        padding: 8px 12px;
+        background: #1e5eff;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        text-align: center;
+        font-size: 13px;
+        font-weight: 600;
+        transition: transform 0.1s
+      }
+
+      a:hover {
+        transform: translateY(-1px);
+      }
     </style>
   </head>
 
@@ -87,6 +105,7 @@
     </header>
 
     <button id="exportBtn">Export Job Offers</button>
+    <div class="download"></div>
 
     <script src="popup.js"></script>
   </body>
