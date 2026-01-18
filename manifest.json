@@ -1,0 +1,22 @@
+{
+    "manifest_version" : 3,
+    "name": "SDP CareerExporter",
+    "version": "1.0",
+    "description": "SDP CareerExporter is a Chrome extension for Université Laval students that helps collect job offers from the SDP platform in one click. The extension extracts key details such as job title, company, location, and link, then exports everything to a CSV file ready for use in a CRM or job tracking tool. It saves time and helps students organize their job search more efficiently.",
+    "permissions": [
+        "scripting",
+        "activeTab",
+        "storage"
+    ],
+    "action": {
+        "default_popup": "popup.html",
+        "default_title": "SDP CareerExporter",
+        "default_icon": {
+            "16": "icon16.png",
+            "512": "icon512.png"
+        }
+    },
+    "background": {
+        "service_worker": "background.js"
+    }
+}
