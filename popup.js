@@ -4,13 +4,55 @@ document.getElementById("exportBtn").addEventListener("click", () => {
     btn.textContent = "Exporting..."
     chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
         chrome.tabs.sendMessage(tabs[0].id, {action: "export_job_offers"}, (response) => {
+            btn.disabled = false
             btn.textContent = "Export Job Offers"
 
-            const csvData = buildCSV(response.headers, response.jobs)
-            const downloadLink = downloadCSV(csvData, response.jobs.length)
+            if(response.status === "success") {
+                console.log('here')
+                const csvData = buildCSV(response.headers, response.jobs)
+                const downloadLink = downloadCSV(csvData, response.jobs.length)
 
-            document.querySelector('.download-container').appendChild(downloadLink)
-            createConfetti()
+                document.querySelector('.download-container').appendChild(downloadLink)
+                createConfetti()
+            }
+        })
+    })
+})
+
+document.addEventListener('DOMContentLoaded', () => {
+    chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, {action: "verify_page"}, (response) => {
+            if (response.status === "success" && response.message === "We are at the first page") {
+                document.getElementById("prevBtn").disabled = true
+            } else if (response.status === "success" && response.message === "We are at the max page") {
+                document.getElementById("nextBtn").disabled = true
+            }
+        })
+    })
+})
+
+document.getElementById("nextBtn").addEventListener("click", () => {
+    chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, {action: "next"}, (response) => {
+            if (response.status === "success" && response.message === "We have reached the max page") {
+                document.getElementById("nextBtn").disabled = true
+            }
+            if(document.getElementById("prevBtn").disabled) {
+                document.getElementById("prevBtn").disabled = false
+            }
+        })
+    })
+})
+
+document.getElementById("prevBtn").addEventListener("click", () => {
+    chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, {action: "prev"}, (response) => {
+            if (response.status === "success" && response.message === "We have reached the first page") {
+                document.getElementById("prevBtn").disabled = true
+            }
+            if(document.getElementById("nextBtn").disabled) {
+                document.getElementById("nextBtn").disabled = false
+            }
         })
     })
 })
