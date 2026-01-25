@@ -2,8 +2,9 @@ document.getElementById("exportBtn").addEventListener("click", () => {
     const btn = document.getElementById("exportBtn")
     btn.disabled = true
     btn.textContent = "Exporting..."
+    const isLikedOnly = document.getElementById("likedOnlyToggle").checked
     chrome.tabs.query({active: true, currentWindow: true}, (tabs) => {
-        chrome.tabs.sendMessage(tabs[0].id, {action: "export_job_offers"}, (response) => {
+        chrome.tabs.sendMessage(tabs[0].id, {action: "export_job_offers", isLikedOnly: isLikedOnly}, (response) => {
             btn.disabled = false
             btn.textContent = "Export Job Offers"
 

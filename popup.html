@@ -140,6 +140,68 @@
         background: #059669;
         transform: translateY(-1px);
       }
+
+      footer {
+        margin-top: 14px;
+        font-size: 11px;
+        color: #9ca3af;
+        text-align: center;
+      }
+
+      .filter-section {
+        margin-bottom: 12px;
+        padding: 10px;
+        background: #f3f4f6;
+        border-radius: 6px;
+      }
+
+      .toggle-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        user-select: none;
+      }
+
+      .toggle-container input[type="checkbox"] {
+        display: none;
+      }
+
+      .toggle-slider {
+        position: relative;
+        width: 44px;
+        height: 24px;
+        background: #d1d5db;
+        border-radius: 12px;
+        transition: background 0.3s;
+      }
+
+      .toggle-slider::after {
+        content: '';
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        width: 20px;
+        height: 20px;
+        background: white;
+        border-radius: 50%;
+        transition: transform 0.3s;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      .toggle-container input:checked + .toggle-slider {
+        background: #10b981;
+      }
+
+      .toggle-container input:checked + .toggle-slider::after {
+        transform: translateX(20px);
+      }
+
+      .toggle-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #374151;
+      }
     </style>
   </head>
 
@@ -151,6 +213,14 @@
       </div>
       <div class="subtitle">Export job offers to CSV</div>
     </header>
+
+    <div class="filter-section">
+      <label class="toggle-container">
+        <input type="checkbox" id="likedOnlyToggle">
+        <span class="toggle-slider"></span>
+        <span class="toggle-label">Only liked jobs</span>
+      </label>
+    </div>
 
     <div class="pagination-controls">
       <button id="prevBtn" title="Previous page">
@@ -173,4 +243,12 @@
 
     <script src="popup.js"></script>
   </body>
+
+  <footer>
+    Built with 
+    <svg viewBox="0 0 24 24" fill="currentColor" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle; color: #ff6b6b; margin: 0 2px;">
+      <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+    </svg>
+    for ULaval students
+  </footer>
 </html>
