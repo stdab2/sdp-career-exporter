@@ -9,7 +9,6 @@ document.getElementById("exportBtn").addEventListener("click", () => {
             btn.textContent = "Export Job Offers"
 
             if(response.status === "success") {
-                console.log('here')
                 const csvData = buildCSV(response.headers, response.jobs)
                 const downloadLink = downloadCSV(csvData, response.jobs.length)
 

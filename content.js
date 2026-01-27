@@ -17,9 +17,9 @@ chrome.runtime.onMessage.addListener(
                 sendResponse({status: "error", error: error.message})
             }
         } else if(request.action === "next") {
-            next()
+            next(sendResponse)
         } else if(request.action === "prev") {
-            prev()
+            prev(sendResponse)
         } else {
             const pageNumberSection = Array.from(document.querySelectorAll('.k-pager-numbers'))[0]
             const activePageNumber =  pageNumberSection.querySelector('.k-link.k-state-selected').textContent
@@ -37,20 +37,19 @@ chrome.runtime.onMessage.addListener(
 )
 
 
-
 const filterLikedOnly = jobNode => {
     const isALikedJob = jobNode.querySelector('.k-icon.k-i-fav.icon-remove-favori')
     return !!isALikedJob
 }
 
-const next = () => {
+const next = sendResponse => {
     const navButtons = Array.from(document.querySelectorAll('.k-link.k-pager-nav'))
     const nextPageButton = navButtons.at(navButtons.length - 2)
-    const currentPage = document.querySelector('.k-link.k-state-selected')
+    const currentPage = document.querySelector('.k-link.k-state-selected').textContent
     nextPageButton.click()
 
     const checkInterval = setInterval(() => {
-        const newPage = document.querySelector('.k-state-selected')?.textContent;
+        const newPage = document.querySelector('.k-link.k-state-selected').textContent
 
         if(currentPage != newPage) {
             const pageNumberSection = Array.from(document.querySelectorAll('.k-pager-numbers'))[0]
@@ -70,14 +69,14 @@ const next = () => {
     }, 5000);
 }
 
-const prev = () => {
+const prev = sendResponse => {
     const navButtons = Array.from(document.querySelectorAll('.k-link.k-pager-nav'))
     const prevPageButton = navButtons[1]
-    const currentPage = document.querySelector('.k-link.k-state-selected')
+    const currentPage = document.querySelector('.k-link.k-state-selected').textContent
     prevPageButton.click()
     
     const checkInterval = setInterval(() => {
-        const newPage = document.querySelector('.k-state-selected')?.textContent;
+        const newPage = document.querySelector('.k-link.k-state-selected').textContent
 
         if(currentPage != newPage) {
             const pageNumberSection = Array.from(document.querySelectorAll('.k-pager-numbers'))[0]
