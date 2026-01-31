@@ -28,8 +28,6 @@ chrome.runtime.onMessage.addListener(
                 sendResponse({status: "success", message: "We are at the first page"})
             } else if(activePageNumber === lastVisiblePage) {
                 sendResponse({status: "success", message: "We are at the max page"})
-            } else {
-                sendResponse({status: "success", message: "We have not reached the first page"})
             }
         }
         return true
